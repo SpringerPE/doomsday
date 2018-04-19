@@ -182,6 +182,26 @@ func getCache(core *doomsday.Core) func(w http.ResponseWriter, r *http.Request) 
 	}
 }
 
+type notFoundHandler struct{}
+
+func (notFoundHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(404)
+}
+
+func webHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "" || r.URL.Path == "/" {
+		r.URL.Path = "/index.html"
+	}
+
+	if page, found := assets[r.URL.Path]; found {
+		w.WriteHeader(http.StatusOK)
+		w.Write(page)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("That page doesn't exist"))
+	}
+}
+
 func refreshCache(core *doomsday.Core) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		go core.Populate()

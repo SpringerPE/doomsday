@@ -27,3 +27,6 @@ all: darwin linux
 
 clean:
 	rm -f $(APP_NAME) $(APP_NAME)-darwin $(APP_NAME)-linux
+
+embed:
+	go run utils/embed.go web
