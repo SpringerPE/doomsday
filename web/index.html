@@ -22,6 +22,7 @@
   display: flex;
   margin-left: 2%;
   margin-right: 2%;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -32,7 +33,7 @@
   border: 1px solid #EF9A9A;    /* Set up Border */
   border-radius: 4px;           /* Slightly Curve edges */
   overflow: hidden;             /* Fixes the corners */
-  margin: 5px;                  /* Add space between cards */
+  margin: 15px;                  /* Add space between cards */
 }
 /* .card div:hover {
   background-color: #eee; 
@@ -180,20 +181,21 @@
     // when you make the request you might get a 401
     // if you get a 401 you should then ask for password
     function generateCards() {
-      apiInfo = grabInfoFromAPI();
-      console.log("apiinfo is: " + apiInfo);
-      for (var i = 0; i < apiInfo.length; i++) {
+      $.get("http://localhost:8111/v1/cache", function (data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i])
         $(".flex-container").append(
-          '<div class="card dropshadow"><div class="card-header">' +
-          apiInfo.commonName +
+          '<li><div class="card dropshadow"><div class="card-header">' +
+          data[i].common_name +
           '</div><div class="card-main"><i class="material-icons">fingerprints</i><div class="main-description">' +
-          convertToLocalTime(apiInfo.notAfter) +
-          "</div></div></div>"
+            unixTimeToJSDate(data[i].not_after).toLocaleDateString() +
+          "</div></div></div></li>"
         );
-      }
-      $(".flex-container").append(
-        '<div class="card dropshadow"><div class="card-header">apiInfo.commonName</div><div class="card-main"><i class="material-icons">fingerprints</i><div class="main-description">convertToLocalTime(apiInfo.notAfter)</div></div></div>'
-      );
+        }
+      }).fail(function () {
+        alert("woops"); // or whatever
+      });
     }
 
     function grabInfoFromAPI() {
@@ -201,6 +203,7 @@
       // and remember the jqxhr object for this request
       $.get("http://localhost:8111/v1/cache", function (data) {
         console.log(data);
+        return data
       }).fail(function () {
         alert("woops"); // or whatever
       });
@@ -234,15 +237,6 @@
     </div>
   </div>
   <ul id="card-list" class="flex-container">
-    <li>
-      <div class="card dropshadow">
-        <div class="card-header">Night</div>
-        <div class="card-main">
-          <i class="material-icons">fingerprints</i>
-          <div class="main-description">Hot Tub</div>
-        </div>
-      </div>
-    </li>
   </ul>
 </body>
 
