@@ -1,5 +1,4 @@
 
-<script type="text/javascript">
     // /v1/cache with basic auth
     // then pass token
     $(document).ready(function () {
