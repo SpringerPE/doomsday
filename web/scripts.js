@@ -2,9 +2,22 @@
     // /v1/cache with basic auth
     // then pass token
     $(document).ready(function () {
-      console.log("document ready");
-      document.cookie = "username=John Doe";
       generateCards();
+    });
+
+    $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
+      alert("error")
+      if (jqxhr.status == 401) {
+        displayLogin()
+      }
+    });
+
+    $.ajax({
+      statusCode: {
+        401: function() {
+          displayLogin()
+        }
+      }
     });
 
     $("#search-box").change(function () {
@@ -62,7 +75,7 @@
         );
         }
       }).fail(function () {
-        alert("woops"); // or whatever
+        alert("woops"); 
       });
     }
 
@@ -73,8 +86,12 @@
         console.log(data);
         return data
       }).fail(function () {
-        alert("woops"); // or whatever
+        alert("woops"); 
       });
+    }
+
+    function displayLogin() {
+      alert("login")
     }
 
     function unixTimeToJSDate(unixTime) {
