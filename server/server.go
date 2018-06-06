@@ -101,6 +101,7 @@ func Start(conf Config) error {
 
 	auth := authorizer.TokenHandler()
 	router := mux.NewRouter()
+	router.HandleFunc("/", webHandler).Methods("GET")
 	router.HandleFunc("/v1/info", getInfo(authorizer.Identifier())).Methods("GET")
 	router.HandleFunc("/v1/auth", authorizer.LoginHandler()).Methods("POST")
 	router.HandleFunc("/v1/cache", auth(getCache(core))).Methods("GET")
