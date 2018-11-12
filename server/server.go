@@ -106,7 +106,7 @@ func Start(conf Config) error {
 	router.HandleFunc("/v1/auth", authorizer.LoginHandler()).Methods("POST")
 	router.HandleFunc("/v1/cache", auth(getCache(core))).Methods("GET")
 	router.HandleFunc("/v1/cache/refresh", auth(refreshCache(core))).Methods("POST")
-	router.HandleFunc("/", webHandler).Methods("GET")
+	http.Handle("/", http.StripPrefix("/web/", http.FileServer(http.Dir("web"))))
 
 	fmt.Fprintf(logWriter, "Beginning listening on port %d\n", conf.Server.Port)
 

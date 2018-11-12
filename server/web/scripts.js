@@ -1,6 +1,3 @@
-
-    // /v1/cache with basic auth
-    // then pass token
     $(document).ready(function () {
       generateCards();
     });
