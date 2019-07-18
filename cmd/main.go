@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/doomsday-project/doomsday/client/doomsday"
-	"github.com/doomsday-project/doomsday/version"
+	"doomsday/client/doomsday"
+	"doomsday/version"
 	"github.com/starkandwayne/goutils/ansi"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )

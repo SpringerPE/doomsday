@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/doomsday-project/doomsday/client/doomsday"
-	"github.com/doomsday-project/doomsday/duration"
+	"doomsday/client/doomsday"
+	"doomsday/duration"
 	"github.com/olekukonko/tablewriter"
 	"github.com/starkandwayne/goutils/ansi"
 )

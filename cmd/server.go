@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/doomsday-project/doomsday/server"
+	"doomsday/server"
 )
 
 type serverCmd struct {

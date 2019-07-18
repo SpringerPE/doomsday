@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/doomsday-project/doomsday/server/logger"
+	"doomsday/server/logger"
 	yaml "gopkg.in/yaml.v2"
 )
 

@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/doomsday-project/doomsday/client/doomsday"
-	"github.com/doomsday-project/doomsday/server/logger"
+	"doomsday/client/doomsday"
+	"doomsday/server/logger"
 )
 
 type Source struct {

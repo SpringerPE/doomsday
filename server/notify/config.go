@@ -1,8 +1,8 @@
 package notify
 
 import (
-	"github.com/doomsday-project/doomsday/server/notify/backend"
-	"github.com/doomsday-project/doomsday/server/notify/schedule"
+	"doomsday/server/notify/backend"
+	"doomsday/server/notify/schedule"
 )
 
 type Config struct {

@@ -12,11 +12,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/doomsday-project/doomsday/client/doomsday"
-	"github.com/doomsday-project/doomsday/server/auth"
-	"github.com/doomsday-project/doomsday/server/logger"
-	"github.com/doomsday-project/doomsday/storage"
-	"github.com/doomsday-project/doomsday/version"
+	"doomsday/client/doomsday"
+	"doomsday/server/auth"
+	"doomsday/server/logger"
+	"doomsday/storage"
+	"doomsday/version"
 	"github.com/gorilla/mux"
 )
 

@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/doomsday-project/doomsday/client/doomsday"
+	"doomsday/client/doomsday"
 	"github.com/olekukonko/tablewriter"
 )
 

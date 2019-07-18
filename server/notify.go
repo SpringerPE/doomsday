@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/doomsday-project/doomsday/client/doomsday"
-	"github.com/doomsday-project/doomsday/server/logger"
-	"github.com/doomsday-project/doomsday/server/notify"
-	"github.com/doomsday-project/doomsday/server/notify/backend"
-	"github.com/doomsday-project/doomsday/server/notify/schedule"
+	"doomsday/client/doomsday"
+	"doomsday/server/logger"
+	"doomsday/server/notify"
+	"doomsday/server/notify/backend"
+	"doomsday/server/notify/schedule"
 )
 
 type notifier struct {

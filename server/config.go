@@ -6,8 +6,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/doomsday-project/doomsday/server/auth"
-	"github.com/doomsday-project/doomsday/server/notify"
+	"doomsday/server/auth"
+	"doomsday/server/notify"
 	yaml "gopkg.in/yaml.v2"
 )
 
