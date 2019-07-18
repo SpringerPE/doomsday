@@ -122,6 +122,27 @@
 		]]
 	</script>
 
+
+	<script type="text/html" id="template:cert-card-ipdns-list">
+		[[
+		if (_.value && _.value.length) {
+        ]]
+		<div class="certs-content-label">[[= _.label ]]</div>
+        [[
+			_.value.forEach(function(i) {
+		]]
+		<div class="certs-content-path-backend-container">
+			<div class="certs-content-path-backend-paths-container">
+		      <div class="certs-content-value">[[= lens.escapeHTML(i) ]]</div>
+		    </div>
+		</div>
+		[[
+			});
+		}
+		]]
+	</script>
+
+
 	<script type="text/html" id="template:cert-card-line">
 		[[ 
 		  if (!Array.isArray(_.value)) {
@@ -153,14 +174,18 @@
 			  [[ lens.include("cert-card-header", { label: "COMMON NAME", value: lens.escapeHTML(lens.maybe(_.cert.common_name, "not provided")) }); ]]
 				<div class="certs-content-body">
 				[[
+					lens.include("cert-card-ipdns-list", { label: "DNS", value: _.cert.dns_names });
+					lens.include("cert-card-ipdns-list", { label: "IPs", value: _.cert.ip_addresses });
+					timefmt = Lens.strftime("%a, %b %d %Y at %I:%M %P", _.cert.not_before );
+					lens.include("cert-card-line", { label: "NOT BEFORE", value: timefmt });
 				    timefmt = Lens.strftime("%a, %b %d %Y at %I:%M %P", _.cert.not_after );
 				    var label = "NOT AFTER";
-						if (expired) {
-						  label = "REST IN PEACE";
-							//timefmt = "<s>"+timefmt+"</s> EXPIRED";
-						}
-						lens.include("cert-card-line", { label: label, value: timefmt });
-						lens.include("cert-card-path-list", { paths: _.cert.paths });
+					if (expired) {
+						label = "REST IN PEACE";
+						//timefmt = "<s>"+timefmt+"</s> EXPIRED";
+					}
+					lens.include("cert-card-line", { label: label, value: timefmt });
+					lens.include("cert-card-path-list", { paths: _.cert.paths });
 				]]
 					</div>
 			</div>

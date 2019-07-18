@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"runtime"
 	"sync"
+	"net"
 
 	"doomsday/storage"
 )
@@ -92,8 +93,12 @@ func (b *Core) populateUsing(cache *Cache, paths storage.PathList) (*PopulateSta
 					cache.Merge(
 						fmt.Sprintf("%s", sha1.Sum(cert.Raw)),
 						CacheObject{
-							Subject:  cert.Subject,
-							NotAfter: cert.NotAfter,
+							Subject:               cert.Subject,
+							BasicConstraintsValid: cert.BasicConstraintsValid,
+							DNSNames:              cert.DNSNames,
+							IPAddresses:           parseIPs(cert.IPAddresses),
+							NotAfter:              cert.NotAfter,
+							NotBefore:             cert.NotBefore,
 							Paths: []PathObject{
 								{
 									Location: path + ":" + k,
@@ -155,3 +160,17 @@ func parseCert(c string) []*x509.Certificate {
 
 	return certs
 }
+
+
+func parseIPs(ips []net.IP) []string {
+	if ips == nil {
+		return nil
+	}
+
+	out := []string{}
+	for _, ip := range ips {
+		out = append(out, ip.String())
+	}
+	return out
+}
+

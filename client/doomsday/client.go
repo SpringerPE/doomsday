@@ -103,7 +103,11 @@ func (c *Client) UserpassAuth(username, password string) error {
 type CacheItem struct {
 	Paths      []CacheItemPath `json:"paths"`
 	CommonName string          `json:"common_name"`
-	NotAfter   int64           `json:"not_after"`
+	BasicConstraintsValid bool            `json:"basic_constraints_valid"`
+	DNSNames              []string        `json:"dns_names"`
+	IPAddresses           []string        `json:"ip_addresses"`
+	NotAfter              int64           `json:"not_after"`
+	NotBefore             int64           `json:"not_before"`
 }
 
 type CacheItemPath struct {
