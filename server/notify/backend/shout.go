@@ -44,9 +44,9 @@ func newShoutBackend(c ShoutConfig, uni BackendUniversalConfig) (*Shout, error) 
 	return &Shout{
 		client: shout.Client{
 			Target:   c.URL,
-			Username: c.Username,
-			Password: c.Password,
-			Trace:    uni.Logger,
+			//Username: c.Username,
+			//Password: c.Password,
+			//Trace:    uni.Logger,
 		},
 		topic:          c.Topic,
 		doomsdayDomain: uni.DoomsdayURL,
@@ -54,31 +54,34 @@ func newShoutBackend(c ShoutConfig, uni BackendUniversalConfig) (*Shout, error) 
 }
 
 func (s Shout) OK() error {
-	return s.client.PostEvent(shout.EventIn{
+	_, err := s.client.PostEvent(shout.EventIn{
 		Topic:      s.topic,
 		Message:    msgOK,
 		Link:       s.doomsdayDomain,
 		OccurredAt: time.Now(),
 		OK:         true,
 	})
+	return err
 }
 
 func (s Shout) Soon() error {
-	return s.client.PostEvent(shout.EventIn{
+	_, err := s.client.PostEvent(shout.EventIn{
 		Topic:      s.topic,
 		Message:    msgSoon,
 		Link:       s.doomsdayDomain,
 		OccurredAt: time.Now(),
 		OK:         false,
 	})
+	return err
 }
 
 func (s Shout) Expired() error {
-	return s.client.PostEvent(shout.EventIn{
+	_, err := s.client.PostEvent(shout.EventIn{
 		Topic:      s.topic,
 		Message:    msgExpired,
 		Link:       s.doomsdayDomain,
 		OccurredAt: time.Now(),
 		OK:         false,
 	})
+	return err
 }
