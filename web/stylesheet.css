@@ -384,6 +384,7 @@ div {
 }
 
 .certs-content-path-backend-container .certs-content-value {
+    font-size: 14px;
 	margin-left: 0;
 	padding-left: 0;
 }

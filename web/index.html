@@ -128,16 +128,25 @@
 		if (_.value && _.value.length) {
         ]]
 		<div class="certs-content-label">[[= _.label ]]</div>
+			<div class="certs-content-path-backend-container">
+				<div class="certs-content-path-backend-paths-container">
         [[
+			var counter = 0;
 			_.value.forEach(function(i) {
+			if (counter) {
 		]]
-		<div class="certs-content-path-backend-container">
-			<div class="certs-content-path-backend-paths-container">
-		      <div class="certs-content-value">[[= lens.escapeHTML(i) ]]</div>
+			<div class="horizontal-line"></div>
+		[[
+		    }
+		    counter++;
+		]]
+			<div class="certs-content-value">[[= lens.escapeHTML(i) ]]</div>
+		[[
+			});
+		]]
 		    </div>
 		</div>
 		[[
-			});
 		}
 		]]
 	</script>
