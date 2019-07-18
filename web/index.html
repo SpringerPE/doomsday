@@ -241,9 +241,10 @@
 				return colorShift([255, 193, 7], [200, 185, 15], (21-days) / 7);
 			} else if (days < 28) {
 				return colorShift([200, 185, 15], [40, 167, 69], (28-days) / 7);
-			} 
-
-      return [40, 167, 69];
+			} else if (days < 58) {
+				return colorShift([40, 167, 69], [40, 141, 185], (58-days) / 7);
+			}
+			return [40, 141, 185];
 		}
 
 		function colorShift(end, start, percent) {
@@ -267,9 +268,6 @@
 
 						for (var i = 0; i < data.content.length; i++) {
 							var cert = data.content[i];
-							if (cert.not_after - now > 7776000) {
-								break;
-							}
 
 							if (lists.length == 0 || cert.not_after > lists[lists.length-1].cutoff) {
 								var maxDays = Math.max(0, Math.ceil((cert.not_after - now) / 86400));
