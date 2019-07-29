@@ -27,7 +27,7 @@ type BackendUniversalConfig struct {
 const (
 	typeUnknown int = iota
 	typeSlack
-	typeShout
+	//typeShout
 )
 
 func New(conf Config, uni BackendUniversalConfig) (Backend, error) {
@@ -47,9 +47,6 @@ func New(conf Config, uni BackendUniversalConfig) (Backend, error) {
 	case typeSlack:
 		c = &SlackConfig{}
 		err = yaml.Unmarshal(properties, c.(*SlackConfig))
-	case typeShout:
-		c = &ShoutConfig{}
-		err = yaml.Unmarshal(properties, c.(*ShoutConfig))
 	}
 
 	if err != nil {
@@ -60,8 +57,6 @@ func New(conf Config, uni BackendUniversalConfig) (Backend, error) {
 	switch t {
 	case typeSlack:
 		backend, err = newSlackBackend(*c.(*SlackConfig), uni)
-	case typeShout:
-		backend, err = newShoutBackend(*c.(*ShoutConfig), uni)
 	}
 
 	return backend, err
@@ -71,8 +66,6 @@ func resolveType(t string) int {
 	switch t {
 	case "slack":
 		return typeSlack
-	case "shout", "shout!":
-		return typeShout
 	default:
 		return typeUnknown
 	}
